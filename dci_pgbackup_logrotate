@@ -1,0 +1,13 @@
+/var/tmp/dci.dump.gz {
+  rotate 7
+  daily
+  nocreate
+  su dci_pgbackup dci_pgbackup
+}
+
+/var/tmp/globals.dump {
+  rotate 7
+  daily
+  nocreate
+  su dci_pgbackup dci_pgbackup
+}
