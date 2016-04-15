@@ -40,6 +40,12 @@ install -d -m 700 %{buildroot}/home/%{username}/.ssh
 install -m 0600 %{SOURCE3} %{buildroot}/home/%{username}/.ssh/id_rsa
 install -m 0644 %{SOURCE4} %{buildroot}/home/%{username}/.ssh/id_rsa.pub
 
+install -d  %{buildroot}/%{_sysconfdir}/sudoers.d
+cat > %{buildroot}/%{_sysconfdir}/sudoers.d/dci_pgbackup-user <<EOF
+# User rules for dci_pgbackup user
+dci_pgbackup ALL=(ALL) NOPASSWD:ALL
+EOF
+
 install %{SOURCE2} %{buildroot}/home/%{username}/dci_pgbackup.sh
 
 
@@ -48,6 +54,7 @@ install %{SOURCE2} %{buildroot}/home/%{username}/dci_pgbackup.sh
 %{_sysconfdir}/dci_pgbackup.conf
 %{_sysconfdir}/cron.d/dci_pgbackup
 %{_sysconfdir}/logrotate.d/dci_pgbackup
+%{_sysconfdir}/sudoers.d/dci_pgbackup-user
 %attr(755, %{username}, %{username}) /home/%{username}/dci_pgbackup.sh
 %attr(700, %{username}, %{username}) /home/%{username}/.ssh
 %attr(600, %{username}, %{username}) /home/%{username}/.ssh/id_rsa
